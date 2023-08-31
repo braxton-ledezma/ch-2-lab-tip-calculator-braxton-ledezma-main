@@ -1,0 +1,42 @@
+﻿@model TipCalculator
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Styles {
+    <style>
+        html {
+            font-family: Arial, Helvetica, sans-serif;
+        }      
+
+        form label {
+            width: 10rem;
+            display: inline-block;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+    </style>
+}
+
+<div>
+    <h1>Tip Calculator</h1>
+    <div asp-validation-summary="All"></div>
+    <form asp-action="Index" method="post">
+        <div>
+            <label asp-for="MealCost">Cost of meal:</label>
+            <input asp-for="MealCost" />
+        </div>
+   @foreach (Tip t in Model.Tips) {
+        <div>
+            <label>@t.Label</label>
+            <sapn>@String.Format("{0:C}", t.Value) Total =@String.Format("{0:C}", t.Total)</sapn>
+        </div>
+    }
+        <div>
+            <button type="submit">Calculate</button>
+            <a asp-action="Index">Clear</a>
+        </div>
+    </form>
+</div>
